@@ -2,7 +2,6 @@ package app.dao.implementations;
 
 import app.dao.interfaces.RomDAO;
 import app.mappers.RomMapper;
-import app.models.RAM;
 import app.models.ROM;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,8 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RomDAOImpl extends DAOImpl<ROM> implements RomDAO
-{
+public class RomDAOImpl extends DAOImpl<ROM> implements RomDAO {
 
     private final Connection connection;
     private final RomMapper mapper;

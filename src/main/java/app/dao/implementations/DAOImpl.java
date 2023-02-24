@@ -9,15 +9,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
 public class DAOImpl<T> implements Dao<T> {
-    private T obj = null;
+    private T obj;
+    private final List<T> all;
     private ApplicationContext applicationContext;
 
     public DAOImpl(@NotNull Supplier<? extends T> supplier) {
         obj = supplier.get();
+        all = new ArrayList<>();
     }
 
     @Override
@@ -61,8 +64,10 @@ public class DAOImpl<T> implements Dao<T> {
     }
 
     @Override
-    public T findByCost(@NotNull Connection connection, @NotNull String dbName,
-                        @NotNull Double min, @NotNull Double max) {
+    public T findByCost(@NotNull Connection connection,
+                        @NotNull String dbName,
+                        @NotNull Double min,
+                        @NotNull Double max) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + dbName + " WHERE " +
                     "(cost >= ?) AND (cost <= ?)");
@@ -86,7 +91,18 @@ public class DAOImpl<T> implements Dao<T> {
     @Override
     public List<T> findAll(@NotNull Connection connection, @NotNull String dbName) {
         try {
-            PreparedStatement statement = connection.prepareStatement("");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + dbName);
+            ResultSet resultSet = statement.executeQuery();
+            Mapper<?> mapper = applicationContext.getBean(obj.getClass().getSimpleName(), Mapper.class);
+
+            while (resultSet.next()) {
+                all.add((T) mapper.toModel(resultSet));
+            }
+
+            return all;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 }

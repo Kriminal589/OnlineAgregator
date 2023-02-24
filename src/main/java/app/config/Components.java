@@ -2,6 +2,8 @@ package app.config;
 
 import app.dao.implementations.*;
 import app.dao.interfaces.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +15,7 @@ import java.sql.SQLException;
 import static app.config.ConfigDB.connection;
 
 @Component
-public class DAOImpl {
+public class Components {
 
     @Contract(" -> new")
     @Bean
@@ -55,5 +57,14 @@ public class DAOImpl {
     @Scope("prototype")
     public static @NotNull VideocardDAO videocardDAO() throws SQLException {
         return new VideocardDAOImpl(connection());
+    }
+
+    @Contract(" -> new")
+    @Bean
+    @Scope("singleton")
+    public static @NotNull Gson gson() {
+        return new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
     }
 }

@@ -2,7 +2,6 @@ package app.dao.implementations;
 
 import app.dao.interfaces.VideocardDAO;
 import app.mappers.VideocardMapper;
-import app.models.RAM;
 import app.models.Videocard;
 import org.jetbrains.annotations.NotNull;
 

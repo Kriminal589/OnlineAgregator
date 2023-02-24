@@ -27,6 +27,7 @@ dependencies {
     implementation("org.glassfish.jaxb:jaxb-runtime:2.3.2")
 
     annotationProcessor("org.projectlombok:lombok:1.18.24")
+    implementation("org.springframework.boot:spring-boot-starter-actuator:3.0.2")
 }
 
 tasks.getByName<Test>("test") {

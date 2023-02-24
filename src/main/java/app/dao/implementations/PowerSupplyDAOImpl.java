@@ -4,7 +4,6 @@ import app.dao.interfaces.PowerSupplyDAO;
 import app.mappers.PowerSupplyMapper;
 import app.models.PowerSupply;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
