@@ -9,32 +9,35 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RomDAOImpl extends DAOImpl<ROM> implements RomDAO {
 
     private final Connection connection;
     private final RomMapper mapper;
+    private final List<ROM> all;
 
     public RomDAOImpl(Connection connection) {
         super(ROM::new);
         this.connection = connection;
         this.mapper = new RomMapper();
+        this.all = new ArrayList<>();
     }
 
     @Override
-    public ROM findByMemory(@NotNull String memory) {
+    public List<ROM> findByMemory(@NotNull String memory) {
         try {
-            ROM rom = null;
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rom WHERE memory = ?");
 
             statement.setString(1, memory);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                rom = mapper.toModel(resultSet);
+                all.add(mapper.toModel(resultSet));
             }
 
-            return rom;
+            return all;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -42,19 +45,18 @@ public class RomDAOImpl extends DAOImpl<ROM> implements RomDAO {
     }
 
     @Override
-    public ROM findByType(@NotNull String type) {
+    public List<ROM> findByType(@NotNull String type) {
         try {
-            ROM rom = null;
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rom WHERE type = ?");
 
             statement.setString(1, type);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                rom = mapper.toModel(resultSet);
+                all.add(mapper.toModel(resultSet));
             }
 
-            return rom;
+            return all;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

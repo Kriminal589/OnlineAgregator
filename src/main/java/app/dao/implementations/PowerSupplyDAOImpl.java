@@ -9,32 +9,35 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PowerSupplyDAOImpl extends DAOImpl<PowerSupply> implements PowerSupplyDAO {
 
     private final Connection connection;
     private final PowerSupplyMapper mapper;
+    private final List<PowerSupply> all;
 
     public PowerSupplyDAOImpl(Connection connection) {
         super(PowerSupply::new);
         this.connection = connection;
         this.mapper = new PowerSupplyMapper();
+        this.all = new ArrayList<>();
     }
 
     @Override
-    public PowerSupply findByPower(@NotNull String power) {
+    public List<PowerSupply> findByPower(@NotNull String power) {
         try {
-            PowerSupply powerSupply = null;
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM power_supply WHERE power = ?");
 
             statement.setString(1, power);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                powerSupply = mapper.toModel(resultSet);
+                all.add(mapper.toModel(resultSet));
             }
 
-            return powerSupply;
+            return all;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

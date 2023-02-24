@@ -13,10 +13,10 @@ import java.sql.SQLException;
 
 public abstract class AbstractControllerModels<T> {
 
-    private final ServiceModule<T> service;
-    private final String dbName;
+    protected final ServiceModule<T> service;
+    protected final String dbName;
 
-    public AbstractControllerModels(ServiceModule<T> service) {
+    public AbstractControllerModels(@NotNull ServiceModule<T> service) {
         this.service = service;
 
         String param = service.getParamOfClass().getSimpleName();
@@ -31,18 +31,19 @@ public abstract class AbstractControllerModels<T> {
     }
 
     @RequestMapping("/getByPrice")
-    public @ResponseBody String getByPrice(@RequestParam("cost") Long cost) {
-        return  App.gson.toJson("");
+    public @ResponseBody String getByPrice(@RequestParam(value = "min", defaultValue = "0") Double min,
+                                           @RequestParam(value = "max", defaultValue = "0") Double max) throws SQLException {
+        return service.findByPrice(min, max, dbName);
     }
 
     @RequestMapping("/getByName")
-    public @ResponseBody String getById(@RequestParam("name") String name) {
-        return App.gson.toJson("");
+    public @ResponseBody String getByName(@RequestParam("name") String name) throws SQLException {
+        return service.findByName(name, dbName);
     }
 
     @RequestMapping("/get")
-    public @ResponseBody String get() {
-        return App.gson.toJson("");
+    public @ResponseBody String get() throws SQLException {
+        return service.findAll(dbName);
     }
 
 }

@@ -9,32 +9,35 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProcessorDAOImpl extends DAOImpl<Processor> implements ProcessorDAO {
 
     private final Connection connection;
     private final ProcessorMapper mapper;
+    private final List<Processor> all;
 
     public ProcessorDAOImpl(Connection connection) {
         super(Processor::new);
         this.connection = connection;
         this.mapper = new ProcessorMapper();
+        this.all = new ArrayList<>();
     }
 
     @Override
-    public Processor findByCore(@NotNull Integer core) {
+    public List<Processor> findByCore(@NotNull Integer core) {
         try {
-            Processor processor = null;
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM processor WHERE core = ?");
 
             statement.setInt(1, core);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                processor = mapper.toModel(resultSet);
+                 all.add(mapper.toModel(resultSet));
             }
 
-            return processor;
+            return all;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -42,19 +45,18 @@ public class ProcessorDAOImpl extends DAOImpl<Processor> implements ProcessorDAO
     }
 
     @Override
-    public Processor findBySocket(@NotNull String socket) {
+    public List<Processor> findBySocket(@NotNull String socket) {
         try {
-            Processor processor = null;
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM processor WHERE socket = ?");
 
             statement.setString(1, socket);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                processor = mapper.toModel(resultSet);
+                all.add(mapper.toModel(resultSet));
             }
 
-            return processor;
+            return all;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

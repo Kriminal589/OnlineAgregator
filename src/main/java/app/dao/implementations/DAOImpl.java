@@ -64,7 +64,7 @@ public class DAOImpl<T> implements Dao<T> {
     }
 
     @Override
-    public T findByCost(@NotNull Connection connection,
+    public List<T> findByCost(@NotNull Connection connection,
                         @NotNull String dbName,
                         @NotNull Double min,
                         @NotNull Double max) {
@@ -75,13 +75,13 @@ public class DAOImpl<T> implements Dao<T> {
             statement.setDouble(1, min);
             statement.setDouble(2, max);
             ResultSet resultSet = statement.executeQuery();
+            Mapper<?> mapper = applicationContext.getBean(obj.getClass().getSimpleName(), Mapper.class);
 
             while (resultSet.next()) {
-                Mapper<?> mapper = applicationContext.getBean(obj.getClass().getSimpleName(), Mapper.class);
-                obj = (T) mapper.toModel(resultSet);
+                all.add((T) mapper.toModel(resultSet));
             }
 
-            return obj;
+            return all;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
