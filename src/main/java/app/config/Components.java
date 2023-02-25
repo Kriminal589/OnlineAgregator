@@ -2,6 +2,7 @@ package app.config;
 
 import app.dao.implementations.*;
 import app.dao.interfaces.*;
+import app.mappers.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.jetbrains.annotations.Contract;
@@ -66,5 +67,47 @@ public class Components {
         return new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
+    }
+
+    @Contract(" -> new")
+    @Bean("Motherboard")
+    @Scope("prototype")
+    public static @NotNull MotherboardMapper motherboardMapper() {
+        return new MotherboardMapper();
+    }
+
+    @Contract(" -> new")
+    @Bean("PowerSupply")
+    @Scope("prototype")
+    public static @NotNull PowerSupplyMapper powerSupplyMapper() {
+        return new PowerSupplyMapper();
+    }
+
+    @Contract(" -> new")
+    @Bean("Processor")
+    @Scope("prototype")
+    public static @NotNull ProcessorMapper processorMapper() {
+        return new ProcessorMapper();
+    }
+
+    @Contract(" -> new")
+    @Bean("RAM")
+    @Scope("prototype")
+    public static @NotNull RamMapper ramMapper() {
+        return new RamMapper();
+    }
+
+    @Contract(" -> new")
+    @Bean("ROM")
+    @Scope("prototype")
+    public static @NotNull RomMapper romMapper() {
+        return new RomMapper();
+    }
+
+    @Contract(" -> new")
+    @Bean("Videocard")
+    @Scope("prototype")
+    public static @NotNull VideocardMapper videocardMapper() {
+        return new VideocardMapper();
     }
 }

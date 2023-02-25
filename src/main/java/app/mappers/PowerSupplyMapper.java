@@ -3,12 +3,14 @@ package app.mappers;
 import app.config.Mapper;
 import app.models.PowerSupply;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.context.annotation.Bean;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PowerSupplyMapper implements Mapper<PowerSupply> {
     @Override
+    @Bean(name = "PowerSupply")
     public PowerSupply toModel(@NotNull ResultSet resultSet) throws SQLException {
         PowerSupply powerSupply = new PowerSupply();
 

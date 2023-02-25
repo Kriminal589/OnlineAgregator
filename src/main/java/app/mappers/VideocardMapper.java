@@ -3,6 +3,7 @@ package app.mappers;
 import app.config.Mapper;
 import app.models.Videocard;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.context.annotation.Bean;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

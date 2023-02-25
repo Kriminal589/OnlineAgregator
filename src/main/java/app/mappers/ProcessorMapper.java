@@ -3,6 +3,7 @@ package app.mappers;
 import app.config.Mapper;
 import app.models.Processor;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.context.annotation.Bean;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 
 public class ProcessorMapper implements Mapper<Processor> {
     @Override
+    @Bean(name = "Processor")
     public Processor toModel(@NotNull ResultSet resultSet) throws SQLException {
         Processor processor = new Processor();
 

@@ -1,10 +1,14 @@
 package app.dao.implementations;
 
+import app.config.ApplicationConfiguration;
 import app.dao.interfaces.Dao;
 import app.config.Mapper;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,8 +21,8 @@ import java.util.function.Supplier;
 public class DAOImpl<T> implements Dao<T> {
     private T obj;
     private final List<T> all;
-
-    @Autowired private ApplicationContext applicationContext;
+    private final ConfigurableApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
 
     public DAOImpl(@NotNull Supplier<? extends T> supplier) {
         obj = supplier.get();
