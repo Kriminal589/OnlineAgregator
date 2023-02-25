@@ -62,4 +62,108 @@ public class RamDAOImpl extends DAOImpl<RAM> implements RamDao {
             return null;
         }
     }
+
+    @Override
+    public List<RAM> findByFrequencyAndType(@NotNull String frequency, @NotNull String type) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ram WHERE " +
+                    "(type = ?) AND (frequency = ?)");
+
+            statement.setString(1, type);
+            statement.setString(2, frequency);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                all.add(mapper.toModel(resultSet));
+            }
+
+            return all;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<RAM> findByFrequencyAndMemory(@NotNull String frequency, @NotNull String memory) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ram WHERE " +
+                    "(memory = ?) AND (frequency = ?)");
+
+            statement.setString(1, memory);
+            statement.setString(2, frequency);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                all.add(mapper.toModel(resultSet));
+            }
+
+            return all;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<RAM> findByTypeAndMemory(@NotNull String type, @NotNull String memory) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ram WHERE " +
+                    "(type = ?) AND (memory = ?)");
+
+            statement.setString(1, type);
+            statement.setString(2, memory);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                all.add(mapper.toModel(resultSet));
+            }
+
+            return all;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<RAM> search(@NotNull String frequency, @NotNull String type, @NotNull String memory) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ram WHERE " +
+                    "(type = ?) AND (memory = ?) AND (frequency = ?)");
+
+            statement.setString(1, type);
+            statement.setString(2, memory);
+            statement.setString(3, frequency);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                all.add(mapper.toModel(resultSet));
+            }
+
+            return all;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<RAM> findByFrequency(@NotNull String frequency) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ram WHERE frequency = ?");
+
+            statement.setString(1, frequency);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                all.add(mapper.toModel(resultSet));
+            }
+
+            return all;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface PowerSupplyDAO {
     List<PowerSupply> findByPower(@NotNull String power);
-    List<PowerSupply>
 }

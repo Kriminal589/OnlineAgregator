@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.SQLException;
+
 @Controller
 @RequestMapping("/videocard")
 public class VideocardController extends AbstractControllerModels<Videocard> {
@@ -23,7 +25,7 @@ public class VideocardController extends AbstractControllerModels<Videocard> {
 
     @RequestMapping("/search")
     public @ResponseBody String search(@RequestParam(required = false) String frequency,
-                                       @RequestParam(required = false) String memory) {
+                                       @RequestParam(required = false) String memory) throws SQLException {
         return service.search(frequency, memory, dbName);
     }
 }

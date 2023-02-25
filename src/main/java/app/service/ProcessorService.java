@@ -26,6 +26,8 @@ public class ProcessorService extends ServiceModule<Processor> {
             return Components.gson().toJson(processorDAO.findBySocket(socket));
         } else if (socket == null) {
             return Components.gson().toJson(processorDAO.findByCore(core));
+        } else {
+            return Components.gson().toJson(processorDAO.findBySocketAndCore(socket, core));
         }
     }
 }

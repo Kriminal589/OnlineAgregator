@@ -62,4 +62,25 @@ public class RomDAOImpl extends DAOImpl<ROM> implements RomDAO {
             return null;
         }
     }
+
+    @Override
+    public List<ROM> findByMemoryAndType(@NotNull String type, @NotNull String memory) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM rom WHERE " +
+                    "(type = ?) AND (memory = ?)");
+
+            statement.setString(1, type);
+            statement.setString(2, memory);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                all.add(mapper.toModel(resultSet));
+            }
+
+            return all;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

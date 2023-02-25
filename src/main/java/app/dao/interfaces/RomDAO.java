@@ -8,4 +8,5 @@ import java.util.List;
 public interface RomDAO {
     List<ROM> findByMemory(@NotNull String memory);
     List<ROM> findByType(@NotNull String type);
+    List<ROM> findByMemoryAndType(@NotNull String type, @NotNull String memory);
 }

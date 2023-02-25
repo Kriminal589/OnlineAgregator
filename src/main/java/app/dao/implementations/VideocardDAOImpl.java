@@ -43,4 +43,44 @@ public class VideocardDAOImpl extends DAOImpl<Videocard> implements VideocardDAO
             return null;
         }
     }
+
+    @Override
+    public List<Videocard> findByFrequency(@NotNull String frequency) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM videocard WHERE frequency = ?");
+
+            statement.setString(1, frequency);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                all.add(mapper.toModel(resultSet));
+            }
+
+            return all;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Videocard> findByMemoryAndFrequency(@NotNull String memory, @NotNull String frequency) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM videocard WHERE " +
+                    "(frequency = ?) AND (memory = ?)");
+
+            statement.setString(1, frequency);
+            statement.setString(2, memory);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                all.add(mapper.toModel(resultSet));
+            }
+
+            return all;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

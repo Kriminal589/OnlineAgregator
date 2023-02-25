@@ -62,4 +62,25 @@ public class ProcessorDAOImpl extends DAOImpl<Processor> implements ProcessorDAO
             return null;
         }
     }
+
+    @Override
+    public List<Processor> findBySocketAndCore(@NotNull String socket, @NotNull Integer core) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM processor WHERE " +
+                    "(socket = ?) AND (core = ?)");
+
+            statement.setString(1, socket);
+            statement.setInt(2, core);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                all.add(mapper.toModel(resultSet));
+            }
+
+            return all;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

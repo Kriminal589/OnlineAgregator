@@ -1,6 +1,7 @@
 package app.service;
 
 import app.config.Components;
+import app.config.ConfigDB;
 import app.dao.implementations.RomDAOImpl;
 import app.models.ROM;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +19,15 @@ public class RomService extends ServiceModule<ROM> {
     }
 
     @NotNull
-    public String search(String type, String memory, @NotNull String dbName) {
-        return "";
+    public String search(String type, String memory, @NotNull String dbName) throws SQLException {
+        if (type == null && memory == null) {
+            return Components.gson().toJson(romDAO.findAll(ConfigDB.connection(), dbName));
+        } else if (type == null) {
+            return Components.gson().toJson(romDAO.findByMemory(memory));
+        } else if (memory == null) {
+            return Components.gson().toJson(romDAO.findByType(type));
+        } else {
+            return Components.gson().toJson(romDAO.findByMemoryAndType(type, memory));
+        }
     }
 }

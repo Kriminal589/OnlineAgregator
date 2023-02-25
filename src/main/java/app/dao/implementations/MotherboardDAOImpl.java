@@ -48,7 +48,7 @@ public class MotherboardDAOImpl extends DAOImpl<Motherboard> implements Motherbo
     @Override
     public List<Motherboard> findBySize(@NotNull String size) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM motherboard WHERE size = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM motherboard WHERE size_form = ?");
 
             statement.setString(1, size);
 
