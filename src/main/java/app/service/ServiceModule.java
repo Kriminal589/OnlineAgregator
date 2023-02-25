@@ -4,6 +4,7 @@ import app.config.Components;
 import app.config.ConfigDB;
 import app.dao.implementations.DAOImpl;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import java.sql.SQLException;
@@ -11,8 +12,10 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class ServiceModule<T> {
-    private T obj = null;
+    private final T obj;
     private List<T> all;
+
+    @Autowired
     private ApplicationContext applicationContext;
 
     public Class<?> getParamOfClass() {

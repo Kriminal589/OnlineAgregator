@@ -1,5 +1,6 @@
 package app.mappers;
 
+import app.config.Mapper;
 import app.models.Videocard;
 import org.jetbrains.annotations.NotNull;
 

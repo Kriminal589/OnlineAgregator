@@ -1,12 +1,13 @@
 package app.mappers;
 
+import app.config.Mapper;
 import app.models.PowerSupply;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PowerSupplyMapper implements Mapper<PowerSupply>{
+public class PowerSupplyMapper implements Mapper<PowerSupply> {
     @Override
     public PowerSupply toModel(@NotNull ResultSet resultSet) throws SQLException {
         PowerSupply powerSupply = new PowerSupply();

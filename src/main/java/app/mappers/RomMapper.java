@@ -1,12 +1,13 @@
 package app.mappers;
 
+import app.config.Mapper;
 import app.models.ROM;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RomMapper implements Mapper<ROM>{
+public class RomMapper implements Mapper<ROM> {
     @Override
     public ROM toModel(@NotNull ResultSet resultSet) throws SQLException {
         ROM rom = new ROM();
