@@ -1,12 +1,12 @@
 package parser;
 
-import parser.citilink.ParserCitilink;
+import parser.citilink.ParserVideoCard;
 
 import java.io.IOException;
 
 public class Parser {
     public static void main(String[] args) throws IOException {
-        ParserCitilink parserCitilink = new ParserCitilink();
+        ParserVideoCard parserCitilink = new ParserVideoCard();
         parserCitilink.parser();
     }
 }
