@@ -2,6 +2,7 @@ package app.models;
 
 import lombok.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Getter
 @Setter

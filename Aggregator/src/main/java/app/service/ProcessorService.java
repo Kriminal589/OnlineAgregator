@@ -1,6 +1,7 @@
 package app.service;
 
 import app.config.Components;
+import app.config.ComponentsDAO;
 import app.config.ConfigDB;
 import app.dao.implementations.ProcessorDAOImpl;
 import app.models.Processor;
@@ -15,7 +16,7 @@ public class ProcessorService extends ServiceModule<Processor> {
 
     public ProcessorService() throws SQLException {
         super(Processor::new);
-        processorDAO = (ProcessorDAOImpl) Components.processorDAO();
+        processorDAO = (ProcessorDAOImpl) ComponentsDAO.processorDAO();
     }
 
     @NotNull

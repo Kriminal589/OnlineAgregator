@@ -10,7 +10,6 @@ import java.sql.SQLException;
 
 public class RomMapper implements Mapper<ROM> {
     @Override
-    @Bean(name = "ROM")
     public ROM toModel(@NotNull ResultSet resultSet) throws SQLException {
         ROM rom = new ROM();
 

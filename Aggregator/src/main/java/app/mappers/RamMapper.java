@@ -10,7 +10,6 @@ import java.sql.SQLException;
 
 public class RamMapper implements Mapper<RAM> {
     @Override
-    @Bean(name = "RAM")
     public RAM toModel(@NotNull ResultSet resultSet) throws SQLException {
         RAM ram = new RAM();
 

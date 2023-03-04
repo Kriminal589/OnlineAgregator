@@ -14,7 +14,6 @@ import java.sql.SQLException;
 
 public class ProcessorMapper implements Mapper<Processor> {
     @Override
-    @Bean(name = "Processor")
     public Processor toModel(@NotNull ResultSet resultSet) throws SQLException {
         Processor processor = new Processor();
 

@@ -1,6 +1,7 @@
 package app.service;
 
 import app.config.Components;
+import app.config.ComponentsDAO;
 import app.config.ConfigDB;
 import app.dao.implementations.MotherboardDAOImpl;
 import app.models.Motherboard;
@@ -15,7 +16,7 @@ public class MotherboardService extends ServiceModule<Motherboard> {
 
     public MotherboardService() throws SQLException {
         super(Motherboard::new);
-        motherboardDAO = (MotherboardDAOImpl) Components.motherboardDAO();
+        motherboardDAO = (MotherboardDAOImpl) ComponentsDAO.motherboardDAO();
     }
 
     public String search(String socket, String size, @NotNull String dbName) throws SQLException {

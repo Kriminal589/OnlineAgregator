@@ -1,6 +1,7 @@
 package app.service;
 
 import app.config.Components;
+import app.config.ComponentsDAO;
 import app.config.ConfigDB;
 import app.dao.implementations.ProcessorDAOImpl;
 import app.dao.implementations.VideocardDAOImpl;
@@ -16,7 +17,7 @@ public class VideocardService extends ServiceModule<Videocard> {
 
     public VideocardService() throws SQLException {
         super(Videocard::new);
-        videocardDAO = (VideocardDAOImpl) Components.videocardDAO();
+        videocardDAO = (VideocardDAOImpl) ComponentsDAO.videocardDAO();
     }
 
     @NotNull

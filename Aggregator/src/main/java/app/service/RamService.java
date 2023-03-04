@@ -1,6 +1,7 @@
 package app.service;
 
 import app.config.Components;
+import app.config.ComponentsDAO;
 import app.config.ConfigDB;
 import app.dao.implementations.RamDAOImpl;
 import app.models.RAM;
@@ -15,7 +16,7 @@ public class RamService extends ServiceModule<RAM> {
 
     public RamService() throws SQLException {
         super(RAM::new);
-        ramDAO = (RamDAOImpl) Components.ramDao();
+        ramDAO = (RamDAOImpl) ComponentsDAO.ramDao();
     }
 
     @NotNull

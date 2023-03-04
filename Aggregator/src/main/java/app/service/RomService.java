@@ -1,6 +1,7 @@
 package app.service;
 
 import app.config.Components;
+import app.config.ComponentsDAO;
 import app.config.ConfigDB;
 import app.dao.implementations.RomDAOImpl;
 import app.models.ROM;
@@ -15,7 +16,7 @@ public class RomService extends ServiceModule<ROM> {
 
     public RomService() throws SQLException {
         super(ROM::new);
-        romDAO = (RomDAOImpl) Components.romDAO();
+        romDAO = (RomDAOImpl) ComponentsDAO.romDAO();
     }
 
     @NotNull

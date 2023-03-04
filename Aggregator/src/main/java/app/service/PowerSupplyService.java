@@ -1,6 +1,7 @@
 package app.service;
 
 import app.config.Components;
+import app.config.ComponentsDAO;
 import app.dao.implementations.PowerSupplyDAOImpl;
 import app.models.PowerSupply;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +15,7 @@ public class PowerSupplyService extends ServiceModule<PowerSupply> {
 
     public PowerSupplyService() throws SQLException {
         super(PowerSupply::new);
-        powerSupplyDAO = (PowerSupplyDAOImpl) Components.powerSupplyDAO();
+        powerSupplyDAO = (PowerSupplyDAOImpl) ComponentsDAO.powerSupplyDAO();
     }
 
     @NotNull
