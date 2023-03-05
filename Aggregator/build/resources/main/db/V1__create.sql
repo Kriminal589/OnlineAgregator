@@ -8,6 +8,20 @@ CREATE TABLE motherboard (
     CONSTRAINT motherboard_pk PRIMARY KEY (id)
 );
 
+CREATE TABLE user (
+    id          SERIAL          NOT NULL,
+    email       VARCHAR(255)    NOT NULL,
+    password    VARCHAR(255)    NOT NULL,
+    CONSTRAINT user_pk PRIMARY KEY (id)
+);
+
+CREATE TABLE role (
+    id SERIAL NOT NULL,
+    id_user BIGINT REFERENCES user (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    status varchar(255) NOT NULL,
+    CONSTRAINT role_pk PRIMARY KEY (id)
+);
+
 CREATE TABLE processor (
     id          SERIAL          NOT NULL,
     name        VARCHAR(255)    NOT NULL,

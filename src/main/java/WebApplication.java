@@ -12,7 +12,7 @@ public class WebApplication {
             public void run() {
                 new JThread(args).start();
             }
-        }, 60000L, 60000L);
+        }, 0L, 86400000L);
 
         App.main(args);
     }
