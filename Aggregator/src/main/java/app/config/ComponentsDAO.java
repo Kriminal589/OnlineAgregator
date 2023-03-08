@@ -55,4 +55,11 @@ public class ComponentsDAO {
     public static @NotNull VideocardDAO videocardDAO() throws SQLException {
         return new VideocardDAOImpl(connection());
     }
+
+//    @Contract(" -> new")
+//    @Bean()
+//    @Scope("prototype")
+//    public static @NotNull UserDAO userDAO() throws SQLException {
+//        return new UserDAO(connection());
+//    }
 }

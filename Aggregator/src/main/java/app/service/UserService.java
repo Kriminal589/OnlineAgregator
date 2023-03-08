@@ -4,18 +4,22 @@ import app.config.Components;
 import app.dao.implementations.UserDAO;
 import app.models.User;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserDAO userDAO;
 
-    @Autowired
     public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
@@ -25,6 +29,7 @@ public class UserService {
     }
 
     public @NotNull String signup(@NotNull String email, @NotNull String password, @NotNull HttpSession session) {
+
         User user = userDAO.findByEmail(email);
 
         if (!Objects.equals(user, null)) {
@@ -33,6 +38,7 @@ public class UserService {
 
         userDAO.add(email, password);
         session.setAttribute("authObject", "AUTHENTICATED");
+
         return Components.gson().toJson(userDAO.findByEmail(email));
     }
 
@@ -40,12 +46,20 @@ public class UserService {
         return Components.gson().toJson(userDAO.findById(id));
     }
 
-    public @NotNull String signin(@NotNull String email, @NotNull String password, @NotNull HttpSession session) {
-        User user = userDAO.findByEmailAndPassword(email, password);
+    public @NotNull User findByEmail(@NotNull String email) {
+        return userDAO.findByEmail(email);
+    }
 
-        if (user != null) {
-            session.setAttribute("authObject", "AUTHENTICATED");
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        User user = userDAO.findByEmail(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
         }
-        return Components.gson().toJson(user);
+
+        Collection<? extends GrantedAuthority> authorities = new ArrayList<>();
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
 }

@@ -1,6 +1,5 @@
 package app.dao.implementations;
 
-import app.config.ConfigDB;
 import app.mappers.UserMapper;
 import app.models.User;
 import org.jetbrains.annotations.NotNull;
@@ -17,14 +16,12 @@ import java.util.List;
 public class UserDAO {
     private final Connection connection;
     private final UserMapper userMapper;
-    private final RoleDAO roleDAO;
     private List<User> all;
 
     public UserDAO(Connection connection) {
         this.connection = connection;
         this.userMapper = new UserMapper();
         this.all = null;
-        this.roleDAO = new RoleDAO(connection);
     }
 
     public @NotNull List<User> findAll() {
@@ -35,7 +32,7 @@ public class UserDAO {
             ResultSet resultSetUser = statement.executeQuery();
 
             while (resultSetUser.next()) {
-                all.add(userMapper.simpleUser(resultSetUser));
+                all.add(userMapper.toUser(resultSetUser));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -55,7 +52,7 @@ public class UserDAO {
             ResultSet resultSetUser = statement.executeQuery();
 
             while (resultSetUser.next()) {
-                user = userMapper.toUser(resultSetUser, roleDAO.findByIdUser(resultSetUser.getLong("id")));
+                user = userMapper.toUser(resultSetUser);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -77,7 +74,7 @@ public class UserDAO {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                user = userMapper.toUser(resultSet, roleDAO.findByIdUser(resultSet.getLong("id")));
+                user = userMapper.toUser(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -98,7 +95,7 @@ public class UserDAO {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                user = userMapper.toUser(resultSet, roleDAO.findByIdUser(resultSet.getLong("id")));
+                user = userMapper.toUser(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -114,6 +111,14 @@ public class UserDAO {
 
             statement.setString(1, email);
             statement.setString(2, password);
+
+            statement.executeUpdate();
+
+            User user = findByEmail(email);
+            statement = connection.prepareStatement("INSERT INTO role(id_user, status) VALUES (?, ?)");
+
+            statement.setLong(1, user.getId());
+            statement.setString(2, "USER");
 
             return statement.executeUpdate();
         } catch (SQLException e) {

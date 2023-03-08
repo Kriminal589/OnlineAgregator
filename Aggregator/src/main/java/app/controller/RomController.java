@@ -1,10 +1,7 @@
 package app.controller;
 
-import app.App;
-import app.models.Motherboard;
 import app.models.ROM;
 import app.service.RomService;
-import app.service.ServiceModule;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

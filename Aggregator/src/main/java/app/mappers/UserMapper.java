@@ -9,14 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UserMapper {
-    public @NotNull User simpleUser(@NotNull ResultSet resultSetUser) throws SQLException {
-        return toModel(resultSetUser);
-    }
-
-    public @NotNull User toUser(@NotNull ResultSet resultSetUser, @NotNull ResultSet resultSetRoles) throws SQLException {
+    public @NotNull User toUser(@NotNull ResultSet resultSetUser) throws SQLException {
         User user = toModel(resultSetUser);
-
-        user.setRole(getRoles(resultSetRoles));
 
         return user;
     }
@@ -29,15 +23,5 @@ public class UserMapper {
         user.setPassword(resultSetUser.getString("password"));
 
         return user;
-    }
-
-    private @NotNull Set<String> getRoles(@NotNull ResultSet resultSetRoles) throws SQLException {
-        Set<String> roles = new HashSet<>();
-
-        while (resultSetRoles.next()) {
-            roles.add(resultSetRoles.getString("status"));
-        }
-
-        return roles;
     }
 }

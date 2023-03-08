@@ -1,8 +1,5 @@
 package app.controller;
 
-import app.App;
-import app.models.Model;
-import app.models.PowerSupply;
 import app.service.ServiceModule;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.RequestMapping;
