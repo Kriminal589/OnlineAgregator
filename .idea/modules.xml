@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Aggregator/OnlineAgregator.Aggregator.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Aggregator/OnlineAgregator.Aggregator.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Aggregator/OnlineAgregator.Aggregator.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Aggregator/OnlineAgregator.Aggregator.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OnlineAgregator.main.iml" filepath="$PROJECT_DIR$/.idea/modules/OnlineAgregator.main.iml" />
     </modules>
   </component>
 </project>

@@ -20,7 +20,7 @@ CREATE TABLE processor (
     name        VARCHAR(255)    NOT NULL,
     cost        DOUBLE          NOT NULL,
     url         TEXT            NOT NULL,
-    core        INT             NOT NULL,
+    core        VARCHAR(255)    NOT NULL,
     socket      VARCHAR(255)    NOT NULL,
     CONSTRAINT processor_pk PRIMARY KEY (id)
 );

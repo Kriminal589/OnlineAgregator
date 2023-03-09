@@ -24,3 +24,11 @@ dependencies {
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
+
+tasks.bootJar {
+    enabled = true
+}
+
+tasks.bootBuildImage {
+    imageName = "Novikov" +rootProject.name+'-'+project.name
+}

@@ -35,9 +35,62 @@ public class Mapper {
         socket = socket.substring(socket.indexOf(":") + 1);
         socket = socket.split(";")[0];
 
-        output.add(format);
+        output.add(format.substring(1));
+        output.add(socket.substring(1));
+
+        return output;
+    }
+
+    @NotNull
+    public String getPowerSupply(@NotNull List<WebElement> webElementList) {
+        String power = webElementList.get(0).getAttribute("innerText");
+
+        return power.substring(power.indexOf(":") + 2, power.indexOf(","));
+    }
+
+    @NotNull
+    public List<String> getProcessor(@NotNull List<WebElement> webElementList) {
+        final List<String> output = new ArrayList<>();
+        String core = webElementList.get(0).getAttribute("innerText");
+        String socket = webElementList.get(2).getAttribute("innerText");
+
+        core = core.substring(core.indexOf(":") + 2).replaceAll(";", "");
+        socket = socket.substring(socket.indexOf(":") + 2).replaceAll(";", "");
+
+        output.add(core);
         output.add(socket);
 
         return output;
+    }
+
+    @NotNull
+    public List<String> getRAM(@NotNull String title) {
+        try {
+            final List<String> output = new ArrayList<>();
+            int index = title.indexOf("DDR");
+            String name = title.substring(0, index - 1);
+            String type = title.substring(index, index + 4);
+            String info = title.substring(title.lastIndexOf("-  ") + 3);
+            info = info.substring(0, info.indexOf(","));
+            String frequency = info.substring(info.toCharArray().length - 5);
+            String memory = info.substring(0, info.toCharArray().length - 5);
+
+            output.add(name);
+            output.add(type);
+            output.add(memory);
+            output.add(frequency);
+
+            return output;
+        } catch (Exception e) {
+            System.out.println(title);
+            throw new RuntimeException();
+        }
+    }
+
+    @NotNull
+    public String getRomHDD(@NotNull List<WebElement> webElementList) {
+        String memory = webElementList.get(0).getAttribute("innerText");
+
+        return memory.substring(memory.indexOf(":") + 2).replace(";", "");
     }
 }
