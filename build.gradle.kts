@@ -1,7 +1,5 @@
 plugins {
     id("java")
-    id("org.springframework.boot") version "2.6.7"
-    id ("io.spring.dependency-management") version "1.0.10.RELEASE"
 }
 
 allprojects {
@@ -12,12 +10,6 @@ allprojects {
 
 repositories {
     mavenCentral()
-}
-
-subprojects {
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "io.spring.dependency-management")
-    apply(plugin = "java")
 }
 
 dependencies {
@@ -33,23 +25,7 @@ tasks.getByName<Test>("test") {
 }
 
 tasks.withType<Jar> {
-
     manifest {
         attributes["Main-Class"] = "WebApplication"
     }
-}
-
-tasks.register<Jar>("uber") {
-    archiveClassifier.set("uber")
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from(sourceSets.main.get().output)
-
-    dependsOn(configurations.runtimeClasspath)
-    from({
-        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
-    })
-}
-
-tasks.bootBuildImage {
-    enabled = false
 }

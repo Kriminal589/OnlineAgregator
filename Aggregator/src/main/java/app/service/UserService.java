@@ -4,19 +4,13 @@ import app.config.Components;
 import app.dao.implementations.UserDAO;
 import app.models.User;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Objects;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
     private final UserDAO userDAO;
 
@@ -48,18 +42,5 @@ public class UserService implements UserDetailsService {
 
     public @NotNull User findByEmail(@NotNull String email) {
         return userDAO.findByEmail(email);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        User user = userDAO.findByEmail(username);
-
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-
-        Collection<? extends GrantedAuthority> authorities = new ArrayList<>();
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
 }

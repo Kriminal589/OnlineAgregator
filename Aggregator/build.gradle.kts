@@ -19,7 +19,6 @@ dependencies {
     implementation("org.flywaydb:flyway-mysql:9.8.2")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.7.5")
-    implementation("org.springframework.boot:spring-boot-starter-security:2.6.3")
     implementation("org.springframework.boot:spring-boot-starter-web:2.7.5")
     implementation("com.google.code.gson:gson:2.10")
     compileOnly("org.projectlombok:lombok:1.18.24")
@@ -28,19 +27,8 @@ dependencies {
     implementation("org.glassfish.jaxb:jaxb-runtime:2.3.2")
 
     annotationProcessor("org.projectlombok:lombok:1.18.24")
-
-    implementation("io.jsonwebtoken:jjwt:0.9.1")
 }
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
-}
-
-tasks.bootJar {
-    enabled = true
-}
-
-
-tasks.bootBuildImage {
-    imageName = "Novikov" +rootProject.name+'-'+project.name
 }

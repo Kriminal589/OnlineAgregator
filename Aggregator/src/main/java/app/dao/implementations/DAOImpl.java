@@ -51,10 +51,10 @@ public class DAOImpl<T> implements Dao<T> {
 
     @Override
     public T findByName(@NotNull Connection connection, @NotNull String dbName, @NotNull String name) {
+        String request = "SELECT * FROM " + dbName + " WHERE name = '" + name + "'";
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + dbName + " WHERE name = ?");
+            PreparedStatement statement = connection.prepareStatement(request);
 
-            statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {

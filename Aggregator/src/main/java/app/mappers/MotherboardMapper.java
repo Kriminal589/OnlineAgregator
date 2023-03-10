@@ -17,7 +17,7 @@ public class MotherboardMapper implements Mapper<Motherboard> {
         Motherboard motherboard = new Motherboard();
 
         motherboard.setId(resultSet.getLong("id"));
-        motherboard.setSize(resultSet.getString("size"));
+        motherboard.setSize(resultSet.getString("size_form"));
         motherboard.setName(resultSet.getString("name"));
         motherboard.setSocket(resultSet.getString("socket"));
         motherboard.setCost(resultSet.getDouble("cost"));

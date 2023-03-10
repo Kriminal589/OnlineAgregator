@@ -12,6 +12,9 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Aggregator" />
             <option value="$PROJECT_DIR$/Parser" />
+            <option value="$PROJECT_DIR$/Parser/src" />
+            <option value="$PROJECT_DIR$/Parser/src/main" />
+            <option value="$PROJECT_DIR$/Parser/src/main/test" />
           </set>
         </option>
       </GradleProjectSettings>

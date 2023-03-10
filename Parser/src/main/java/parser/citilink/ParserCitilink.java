@@ -94,6 +94,8 @@ public class ParserCitilink {
                 String name = element.findElement(By.cssSelector(".app-catalog-9gnskf")).getText();
                 List<WebElement> li = element.findElements(By.cssSelector("li"));
 
+                name = name.substring(18);
+
                 if (i == 0) {
                     deleteRaw(connection, this.count);
                 }
@@ -121,6 +123,8 @@ public class ParserCitilink {
                 String name = element.findElement(By.cssSelector(".app-catalog-9gnskf")).getText();
                 List<WebElement> li = element.findElements(By.cssSelector("li"));
 
+                name = name.substring(10);
+
                 if (i == 0) {
                     deleteRaw(connection, this.count);
                 }
@@ -147,7 +151,7 @@ public class ParserCitilink {
                 String cost = element.findElement(By.cssSelector("span.app-catalog-j8h82j")).getText();
                 String name = element.findElement(By.cssSelector(".app-catalog-1tp0ino")).getText();
 
-                name = name.substring(0, name.indexOf(","));
+                name = name.substring(13, name.indexOf(","));
 
                 List<WebElement> li = element.findElements(By.cssSelector("li"));
 
@@ -210,6 +214,8 @@ public class ParserCitilink {
                 String name = element.findElement(By.cssSelector("a.app-catalog-9gnskf")).getText();
                 String cost = element.findElement(By.cssSelector("span.app-catalog-j8h82j")).getText();
                 List<WebElement> li = element.findElements(By.cssSelector("li"));
+
+                name = name.substring(13);
 
                 insert.addROM(name, mapper.getRomHDD(li), connection, URL, Double.parseDouble(cost.replaceAll("\\s+","")), "HDD");
             }

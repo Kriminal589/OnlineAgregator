@@ -68,7 +68,7 @@ public class Mapper {
         try {
             final List<String> output = new ArrayList<>();
             int index = title.indexOf("DDR");
-            String name = title.substring(0, index - 1);
+            String name = title.substring(14, index - 1);
             String type = title.substring(index, index + 4);
             String info = title.substring(title.lastIndexOf("-  ") + 3);
             info = info.substring(0, info.indexOf(","));
